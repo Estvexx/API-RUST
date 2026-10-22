@@ -1,0 +1,70 @@
+// requests.http
+@baseUrl = http://localhost:8000
+
+### 1. Test Root Endpoint (Health Check)
+GET {{baseUrl}}/
+
+### 2. Get All Users (Should be empty initially)
+GET {{baseUrl}}/users
+
+### 3. Create User 1
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "Alice Smith",
+    "email": "alice@example.com"
+}
+
+### 4. Create User 2
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "Bob Jones",
+    "email": "bob@example.com"
+}
+
+### 5. Create User 3
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "Charlie Day",
+    "email": "charlie@example.com"
+}
+
+### 6. Get All Users (Should see 3 users now)
+GET {{baseUrl}}/users
+
+### 7. Get Single User (Assuming ID 1 exists)
+GET {{baseUrl}}/users/1
+
+### 8. Get User that does not exist (Test 404)
+GET {{baseUrl}}/users/9999
+
+### 9. Update User 2
+# Note: Ensure your backend handles PUT or PATCH for updates
+PUT {{baseUrl}}/users/2
+Content-Type: application/json
+
+{
+    "name": "Bob James",
+    "email": "bobjames@example.com"
+}
+
+### 10. Get All Users (Verify Update)
+GET {{baseUrl}}/users
+
+### 11. Delete User 2
+DELETE {{baseUrl}}/users/3
+
+### 12. Get All Users (Final check - Bob should be gone)
+GET {{baseUrl}}/users
+
+### 13
+GET http://localhost:8001/protected
+
+### Testar rota protegida COM token
+GET http://localhost:8001/protected
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIyZ2dSeC1CT2JYUkgxZVg3Tm5aR0lJN0k4RFh1dFI2T1ZZcjk1TzBJemtJIn0.eyJleHAiOjE3OTI2ODAzMDMsImlhdCI6MTc5MjY4MDAwMywianRpIjoib25ydHJvOjBlZTM5MWFkLWI3ZjctZmFlMS02YzUyLTE0NjAzMzhjZDVjMSIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9yZWFsbXMvbXktYXBpLXJlYWxtIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImJkZDA2NTdlLWUzMGItNDE2MS04YjI1LWYwMzQ5N2UzZjRlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6Im15LWF4dW0tYXBpIiwic2lkIjoiaThPY0lMQ3UyYnZQOV9LczhNQ0FFSGduIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW15LWFwaS1yZWFsbSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJ0ZXN0ZSBtYXJjb3MiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0ZSIsImdpdmVuX25hbWUiOiJ0ZXN0ZSIsImZhbWlseV9uYW1lIjoibWFyY29zIiwiZW1haWwiOiJ0ZXN0ZUBnbWFpbC5jb20ifQ.pbExCCwzNMKB68uahygYwKlFOIur6yqzUgUQ_Fx_wIMxsxE6wsCyesTt_KLTqC5dEFJaXimhaBzCUGG5kdyWIdD_pEJPlGs67SREgMxlk4zAODFDXcvmmoUwri7GN93MCJkl-C3X3-xEwPS2Ny9Fz2OGBgPJjD25FY2X0iYC-e32TZivk7xzqu8CctBqqQUA8CMOn1AStuLsiGHNWwIWxNfiq3JHzCE7S-EC9Qb-tNgdE38x2YhuWxbb-b5oQOgjI01sd65CoOAoL8-6n5hahyJqQdbZnf54TCho6n2qTgnARw4HatR8GhoSfQDjdmRR2mSNlAROqmJTP_eWaOuRIQ
